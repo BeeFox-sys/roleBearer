@@ -12,10 +12,11 @@ let profiles = new Mongoose.Schema({
 
 let guild = new Mongoose.Schema({
     id: String,
-    roles: Array
+    roles: {type:Map, default: new Map()}
 })
 
 
 module.exports = {
-    profiles: Mongoose.model('profiles', profiles)
+    profiles: Mongoose.model('profiles', profiles),
+    guilds: Mongoose.model('guilds',guild)
 }

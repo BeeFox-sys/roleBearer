@@ -44,8 +44,18 @@ humanReadablePermissions = {
     MANAGE_EMOJIS:"Manage Emoji",
 }
 
+const {guilds} = require("./schemas")
+async function getGuildDoc(id){
+    let guild = await guilds.findOne({id:id})
+    if(!guild){
+        guild = new guilds({id:id})
+    }
+    return guild
+}
+
 
 module.exports = {
     userFromMention: userFromMention,
-    humanReadablePermissions: humanReadablePermissions
+    humanReadablePermissions: humanReadablePermissions,
+    getGuildDoc: getGuildDoc
 }
