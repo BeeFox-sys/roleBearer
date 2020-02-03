@@ -6,7 +6,7 @@ module.exports = {
     aliases: [],
     description: 'Loads your roles and nickname from a profile\nSadly due to discord limitations, owners cannot have their nicknames set',
     usage: ['load <profile name>'],
-    catagory: null,
+    catagory: "Profiles",
     hidden: false,
     owner: false,
     userPerms: [],

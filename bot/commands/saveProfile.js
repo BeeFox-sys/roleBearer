@@ -6,7 +6,7 @@ module.exports = {
     aliases: [],
     description: 'Saves your roles and nickname to a profile',
     usage: ['save <profile name>'],
-    catagory: null,
+    catagory: "Profiles",
     hidden: false,
     owner: false,
     userPerms: [],

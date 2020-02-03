@@ -6,7 +6,7 @@ module.exports = {
     aliases: ['add'],
     description: 'Adds a role to self assginable roles',
     usage: ['add-role <catagory> <name...>'],
-    catagory: null,
+    catagory: "Self Assign Management",
     hidden: false,
     owner: false,
     userPerms: ["MANAGE_ROLES"],

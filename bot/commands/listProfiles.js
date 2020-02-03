@@ -8,7 +8,7 @@ module.exports = {
     aliases: [],
     description: 'Lists your profiles',
     usage: ['profiles'],
-    catagory: null,
+    catagory: "Profiles",
     hidden: false,
     owner: false,
     userPerms: [],

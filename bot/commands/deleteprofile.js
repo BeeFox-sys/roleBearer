@@ -6,7 +6,7 @@ module.exports = {
     aliases: [],
     description: 'Deletes a profile',
     usage: ['delete <profile name>'],
-    catagory: null,
+    catagory: "Profiles",
     hidden: false,
     owner: false,
     userPerms: [],

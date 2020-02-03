@@ -6,7 +6,7 @@ module.exports = {
     aliases: ['remove'],
     description: 'removes a role from self assginable roles',
     usage: ['remove-role <name...>'],
-    catagory: null,
+    catagory: "Self Assign Management",
     hidden: false,
     owner: false,
     userPerms: ["MANAGE_ROLES"],

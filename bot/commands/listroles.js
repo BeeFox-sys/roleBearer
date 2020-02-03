@@ -8,7 +8,7 @@ module.exports = {
     aliases: ['roles'],
     description: 'lists the joinable roles',
     usage: ['list'],
-    catagory: null,
+    catagory: "Self Assign",
     hidden: false,
     owner: false,
     userPerms: [],
