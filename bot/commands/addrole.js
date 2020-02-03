@@ -9,7 +9,7 @@ module.exports = {
     catagory: null,
     hidden: false,
     owner: false,
-    userPerms: [],
+    userPerms: ["MANAGE_ROLES"],
     runPerms: [],
 	async execute(message, args) {
         if(args.length<2) return message.channel.send("You must supply a catagory and a role name!")

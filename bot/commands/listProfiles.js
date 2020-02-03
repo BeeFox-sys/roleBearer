@@ -1,4 +1,7 @@
 const {profiles} = require("../schemas")
+const Discord = require("discord.js")
+const {escapeMarkdown} = Discord.Util
+
 
 module.exports = {
     name: 'profiles',
@@ -12,7 +15,7 @@ module.exports = {
     runPerms: [],
 	async execute(message, args) {
         let profileList = await profiles.find({guild:message.guild.id,account:message.author.id})
-        let msg = `**__${message.member.displayname}'s profiles__**`
+        let msg = `**__${escapeMarkdown(message.member.displayName)}'s profiles__**`
         for (const profile of profileList) {
             msg += `\n${profile.name}`
         }

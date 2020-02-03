@@ -1,4 +1,5 @@
 const {profiles} = require("../schemas")
+const {getGuildDoc} = require("../utils")
 
 module.exports = {
     name: 'save',
@@ -13,9 +14,10 @@ module.exports = {
 	async execute(message, args) {
         let profileUser = message.author.id;
         let profileGuild = message.guild.id;
+        let guild = await getGuildDoc(profileGuild)
         let profileName = args.join(" ").toLowerCase();
         let profileNickname = message.member.nickname
-        let profileRoles = message.member.roles.map(value => value.id)
+        let profileRoles = message.member.roles.map(value => value.id).filter(id => guild.roles.has(id))
         if(!profileName) return message.channel.send("Must supply a name!");
 
         let existing = await profiles.findOne({account: profileUser,

@@ -5,11 +5,11 @@ module.exports = {
     name: 'remove-role',
     aliases: ['remove'],
     description: 'removes a role from self assginable roles',
-    usage: ['add-role <name...>'],
+    usage: ['remove-role <name...>'],
     catagory: null,
     hidden: false,
     owner: false,
-    userPerms: [],
+    userPerms: ["MANAGE_ROLES"],
     runPerms: [],
 	async execute(message, args) {
         if(args.length<1) return message.channel.send("You must supply a role name!")
