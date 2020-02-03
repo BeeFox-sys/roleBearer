@@ -10,3 +10,6 @@
 `role!unmake <name>` deletes a role
 `role!add <> <name>` adds a role to the self assignable list
 `role!remove <name>` removes a role to the self assignable list
+
+
+https://discordapp.com/oauth2/authorize?client_id=673837747336904735&scope=bot&permissions=402721792

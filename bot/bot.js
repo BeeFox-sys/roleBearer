@@ -1,6 +1,6 @@
 const Discord = require("discord.js")
 const fs = require('fs');
-const {userFromMention,humanReadablePermissions} = require("./utils")
+const {userFromMention,humanReadablePermissions,getGuildDoc} = require("./utils")
 
 //Setup Client
 const client = new Discord.Client()
@@ -81,4 +81,11 @@ Client.on('ready', async () => {
     }
 
 })
+.on('roleDelete',async role => {
+    let guild = await getGuildDoc(role.guild.id)
+    guild.roles.delete(role.id)
+    guild.save()
+})
+//role deletetion handeler
+
 .login(Client.config.token)
