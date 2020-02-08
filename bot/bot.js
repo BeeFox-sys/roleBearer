@@ -8,10 +8,14 @@ global.Client = client
 Client.config = require("../config")
 //Setup Commands
 Client.commands = new Discord.Collection();
+Client.permissions = []
 const commandFiles = fs.readdirSync('./bot/commands').filter(file => file.endsWith('.js'));
 for (const file of commandFiles) {
 	const command = require(`./commands/${file}`);
-	Client.commands.set(command.name, command);
+    Client.commands.set(command.name, command);
+    for (const perm of command.runPerms) {
+        if(!Client.permissions.includes(perm)) Client.permissions.push(perm)
+    }
 }
 
 //setup db
