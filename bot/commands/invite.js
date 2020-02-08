@@ -16,8 +16,9 @@ module.exports = {
             message.channel.send(
                 new MessageEmbed()
                 .setTitle("Invite Role Bearer to your server")
-                .setDescription(`[Click here to invite!](${inviteURL})`)
-                .setImage(await Client.user.avatarURL({size:128}))
+                .addField("Invite Link",`[Click here to invite!](${inviteURL})`,true)
+                .addField("Github","[Click here to see the code](https://github.com/BeeFox-sys/roleBearer/)")
+                .setImage(await Client.user.avatarURL({size:256}))
                 )
         } catch (error) {throw error}
     }
