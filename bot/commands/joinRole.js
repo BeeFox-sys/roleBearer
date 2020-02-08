@@ -12,9 +12,10 @@ module.exports = {
     userPerms: [],
     runPerms: ["MANAGE_ROLES"],
 	async execute(message, args) {
+        let guild = await getGuildDoc(message.guild.id)
+        if(guild.profileMode) return message.channel.send("Sorry! Profile mode is enabled on this server, you cannot edit your roles with this bot")
         if(args.length<1) return message.channel.send("You must supply a role name!")
         let roleName = args.join(' ')
-        let guild = await getGuildDoc(message.guild.id)
 
         let role = message.guild.roles.filter(role => guild.roles.has(role.id)).find(role => role.name.toLowerCase() == roleName.toLowerCase())
 
