@@ -55,7 +55,7 @@ Client.on('ready', async () => {
     }
 
     try {
-        let command = Client.commands.get(commandName) || Client.commands.find(cmd => cmd.aliases.includes());
+        let command = Client.commands.get(commandName) || Client.commands.find(cmd => cmd.aliases.includes(commandName));
         if(command == null) return;
 
         // Permissions check
