@@ -12,7 +12,7 @@ module.exports = {
     userPerms: ["MANAGE_ROLES"],
     runPerms: [],
 	async execute(message, args) {
-        if(args.length<3) return message.channel.send("You must supply a mode, a catagory, and a role name!")
+        if(args.length<2) return message.channel.send("You must supply a mode, a catagory, and a role name!")
         let mode = args.shift().toLowerCase()
         let roleCatagory = args.shift().toLowerCase()
         let roleName = args.join(' ')
@@ -20,14 +20,17 @@ module.exports = {
         if(mode != "add" && mode != "remove") return message.channel.send("Invalid mode!")
         if(!role) return message.channel.send("Invalid role!")
         let guild = await getGuildDoc(message.guild.id)
+        let returnMessage
         if(mode == "add"){
             guild.whitelist.set(role.id,roleCatagory)
+            returnMessage = `Whitelisted ${role.name} to the ${roleCatagory} catagory. Only people with the ${role.name} role will be able to join from this catagory`
         } else {
             guild.whitelist.delete(role.id)
+            returnMessage = `Removed ${roleName} from the whitelist`
         }
 
         let error,newGuild = await guild.save()
         if(error) throw error;
-        return message.channel.send(`Whitelisted ${role.name} to the ${roleCatagory} catagory. Only people with the ${role.name} role will be able to join from this catagory`)
+        return message.channel.send()
     }
 };
