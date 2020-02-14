@@ -54,8 +54,6 @@ Client.on('ready', async () => {
         commandName = args.shift();
     }
 
-    if (!Client.commands.has(commandName)) return;
-
     try {
         let command = Client.commands.get(commandName) || Client.commands.find(cmd => cmd.aliases.includes());
         if(command == null) return;
