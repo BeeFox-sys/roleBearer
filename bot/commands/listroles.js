@@ -18,7 +18,7 @@ module.exports = {
         let catagories = {}
         for (const role of guild.roles) {
             if(!catagories[role[1]]) catagories[role[1]] = `**---${escapeMarkdown(role[1])}---**`
-            let guildRole = message.guild.roles.get(role[0])
+            let guildRole = message.guild.roles.cache.get(role[0])
             if(!guildRole) {
                 guild.roles.delete(role[0])
             }

@@ -13,6 +13,7 @@ let profiles = new Mongoose.Schema({
 let guild = new Mongoose.Schema({
     id: String,
     roles: {type:Map, default: new Map()},
+    whitelist: {type:Map, default: new Map()},
     profileMode: {type: Boolean, default: false}
 })
 

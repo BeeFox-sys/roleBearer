@@ -14,7 +14,7 @@ module.exports = {
 	async execute(message, args) {
         
         let guild = await getGuildDoc(message.guild.id)
-        let roles = message.guild.roles.filter(role => guild.roles.has(role.id))
+        let roles = message.guild.roles.cache.filter(role => guild.roles.has(role.id))
 
         message.member.roles.remove(roles)
 

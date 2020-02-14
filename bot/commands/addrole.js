@@ -15,7 +15,7 @@ module.exports = {
         if(args.length<2) return message.channel.send("You must supply a catagory and a role name!")
         let roleCatagory = args.shift().toLowerCase()
         let roleName = args.join(' ')
-        let role = message.guild.roles.find(role => role.name.toLowerCase() == roleName.toLowerCase())
+        let role = message.guild.roles.cache.find(role => role.name.toLowerCase() == roleName.toLowerCase())
         if(!role) return message.channel.send("Invalid role!")
         let guild = await getGuildDoc(message.guild.id)
         guild.roles.set(role.id,roleCatagory)

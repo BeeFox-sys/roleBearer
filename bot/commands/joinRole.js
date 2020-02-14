@@ -1,9 +1,10 @@
 const {guilds} = require("../schemas")
 const {getGuildDoc} = require ("../utils")
+const {Collection} = require("discord.js")
 
 module.exports = {
     name: 'join',
-    aliases: [],
+    aliases: ['add'],
     description: 'Gives you a self assignable role',
     usage: ['join <name...>'],
     catagory: "Self Assign",
@@ -17,9 +18,15 @@ module.exports = {
         if(args.length<1) return message.channel.send("You must supply a role name!")
         let roleName = args.join(' ')
 
-        let role = message.guild.roles.filter(role => guild.roles.has(role.id)).find(role => role.name.toLowerCase() == roleName.toLowerCase())
+        let role = message.guild.roles.cache.filter(role => guild.roles.has(role.id)).find(role => role.name.toLowerCase() == roleName.toLowerCase())
 
         if(!role) return message.channel.send("Invalid role!")
+        let roleCat = guild.roles.get(role.id)
+        let whitelist = new Collection(guild.whitelist)
+        let whitelistRole = whitelist.findKey(val => val === roleCat)
+        if(whitelistRole){
+            if(!message.member.roles.cache.has(whitelistRole)) return message.channel.send(`I am sorry, you need the ${message.guild.roles.resolve(whitelistRole).name} role to join this role`)
+        }
         message.member.roles.add(role)
 
         return message.channel.send(`Gave you ${role.name}`)
