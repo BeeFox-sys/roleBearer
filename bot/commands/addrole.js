@@ -2,8 +2,8 @@ const {guilds} = require("../schemas")
 const {getGuildDoc} = require ("../utils")
 
 module.exports = {
-    name: 'add-role',
-    aliases: ['add'],
+    name: 'list-role',
+    aliases: [],
     description: 'Adds a role to self assginable roles',
     usage: ['add-role <catagory> <name...>'],
     catagory: "Self Assign Management",

@@ -3,7 +3,7 @@ const {getGuildDoc} = require ("../utils")
 
 module.exports = {
     name: 'leave',
-    aliases: [],
+    aliases: ['remove'],
     description: 'Removes from you a self assignable role',
     usage: ['leave <name...>'],
     catagory: "Self Assign",

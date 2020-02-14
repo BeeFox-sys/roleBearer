@@ -2,8 +2,8 @@ const {guilds} = require("../schemas")
 const {getGuildDoc} = require ("../utils")
 
 module.exports = {
-    name: 'remove-role',
-    aliases: ['remove'],
+    name: 'unlist-role',
+    aliases: [],
     description: 'removes a role from self assginable roles',
     usage: ['remove-role <name...>'],
     catagory: "Self Assign Management",

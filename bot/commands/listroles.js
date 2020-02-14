@@ -4,8 +4,8 @@ const Discord = require("discord.js")
 const {escapeMarkdown} = Discord.Util
 
 module.exports = {
-    name: 'list',
-    aliases: ['roles'],
+    name: 'roles',
+    aliases: ['list'],
     description: 'lists the joinable roles',
     usage: ['list'],
     catagory: "Self Assign",
