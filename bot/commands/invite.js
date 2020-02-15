@@ -17,6 +17,7 @@ module.exports = {
                 new MessageEmbed()
                 .setTitle("Invite Role Bearer to your server")
                 .addField("Invite Link",`[Click here to invite!](${inviteURL})`,true)
+                .addField("Support Server",`[Click Here to access the support server](https://discord.gg/Zvph3FF)`)
                 .addField("Github","[Click here to see the code](https://github.com/BeeFox-sys/roleBearer/)")
                 .setImage(await Client.user.avatarURL({size:256}))
                 )
