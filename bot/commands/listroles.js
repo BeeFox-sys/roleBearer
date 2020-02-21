@@ -1,7 +1,7 @@
 const {guilds} = require("../schemas")
 const {getGuildDoc,capatalizeFirst} = require ("../utils")
 const Discord = require("discord.js")
-const {escapeMarkdown} = Discord.Util
+const {escapeMarkdown,splitMessage} = Discord.Util
 
 module.exports = {
     name: 'roles',
@@ -39,6 +39,14 @@ module.exports = {
                 msg += '\n'+data
             }
         }
-        message.channel.send(msg,{split:true})
+        let msgBits = splitMessage(msg,{char:`>`, prepend:'>',maxLength:1950})
+        if(msgBits[0].length > 2000) {
+            let tempBits = []
+            for (const bit of msgBits) {
+                tempBits.push(splitMessage(bit))
+            }
+            msgBits = tempBits.flat()
+        }
+        message.channel.send(msgBits)
     }
 };
