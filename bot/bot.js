@@ -86,7 +86,11 @@ Client.on('ready', async () => {
 .on('roleDelete',async role => {
     let guild = await getGuildDoc(role.guild.id)
     guild.roles.delete(role.id)
+    let whitelist = new Discord.Collection(guild.whitelist)
+    let wlrole = whitelist.findKey(val => val === role.id)
+    guild.whitelist.delete(wlrole)
     guild.save()
+
 })
 //role deletetion handeler
 

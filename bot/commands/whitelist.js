@@ -25,8 +25,8 @@ module.exports = {
             guild.whitelist.set(roleCatagory,role.id)
             returnMessage = `Whitelisted ${role.name} to the ${roleCatagory} catagory. Only people with the ${role.name} role will be able to join from this catagory`
         } else {
-            guild.whitelist.delete(role.id)
-            returnMessage = `Removed ${roleName} from the whitelist`
+            guild.whitelist.delete(roleCatagory)
+            returnMessage = `Removed whitelist from ${roleCatagory}`
         }
 
         let error,newGuild = await guild.save()
