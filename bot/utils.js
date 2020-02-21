@@ -12,6 +12,10 @@ async function userFromMention(mention){
         return null;
 }
 
+async function capatalizeFirst(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 humanReadablePermissions = {
     ADMINISTRATOR:"Administrator",
     CREATE_INSTANT_INVITE:"Create Invite",
@@ -57,5 +61,6 @@ async function getGuildDoc(id){
 module.exports = {
     userFromMention: userFromMention,
     humanReadablePermissions: humanReadablePermissions,
-    getGuildDoc: getGuildDoc
+    getGuildDoc: getGuildDoc,
+    capatalizeFirst: capatalizeFirst
 }
