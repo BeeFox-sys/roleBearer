@@ -22,7 +22,7 @@ module.exports = {
         let guild = await getGuildDoc(message.guild.id)
         let returnMessage
         if(mode == "add"){
-            guild.whitelist.set(role.id,roleCatagory)
+            guild.whitelist.set(roleCatagory,role.id)
             returnMessage = `Whitelisted ${role.name} to the ${roleCatagory} catagory. Only people with the ${role.name} role will be able to join from this catagory`
         } else {
             guild.whitelist.delete(role.id)
@@ -31,6 +31,6 @@ module.exports = {
 
         let error,newGuild = await guild.save()
         if(error) throw error;
-        return message.channel.send()
+        return message.channel.send(returnMessage)
     }
 };

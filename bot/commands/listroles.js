@@ -17,7 +17,7 @@ module.exports = {
         let guild = await getGuildDoc(message.guild.id)
         let catagories = {}
         for (const role of guild.roles) {
-            if(!catagories[role[1]]) catagories[role[1]] = `**---${escapeMarkdown(role[1])}---**`
+            if(!catagories[role[1]]) catagories[role[1]] = `> **${escapeMarkdown(role[1])}**`
             let guildRole = message.guild.roles.cache.get(role[0])
             if(!guildRole) {
                 guild.roles.delete(role[0])

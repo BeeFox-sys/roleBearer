@@ -23,7 +23,7 @@ module.exports = {
         if(!role) return message.channel.send("Invalid role!")
         let roleCat = guild.roles.get(role.id)
         let whitelist = new Collection(guild.whitelist)
-        let whitelistRole = whitelist.findKey(val => val === roleCat)
+        let whitelistRole = whitelist.get(roleCat)
         if(whitelistRole){
             if(!message.member.roles.cache.has(whitelistRole)) return message.channel.send(`I am sorry, you need the ${message.guild.roles.resolve(whitelistRole).name} role to join this role`)
         }
