@@ -17,7 +17,7 @@ module.exports = {
         let guild = await getGuildDoc(profileGuild)
         let profileName = args.join(" ").toLowerCase();
         let profileNickname = message.member.nickname
-        let profileRoles = message.member.roles.map(value => value.id).filter(id => guild.roles.has(id))
+        let profileRoles = message.member.roles.cache.map(value => value.id).filter(id => guild.roles.has(id))
         if(!profileName) return message.channel.send("Must supply a name!");
 
         let existing = await profiles.findOne({account: profileUser,
