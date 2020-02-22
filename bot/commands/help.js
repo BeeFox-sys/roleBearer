@@ -30,6 +30,7 @@ module.exports = {
                 }
                 for (const commandObj of Client.commands) {
                     let command = commandObj[1]
+                    if(!catagories[command.catagory]) catagories[command.catagory] = ""
                     catagories[command.catagory] += `\n${Client.config.prefix}**${command.name}** - ${command.description.split("\n")[0]}`
                 }
                 for (const catagoryName in catagories) {
