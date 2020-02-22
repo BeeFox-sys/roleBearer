@@ -1,5 +1,6 @@
 {
     "token":"BOT TOKEN",
     "dbUrl":"mongodb://localhost/roleBearer",
-    "prefix":"role!"
+    "prefix":"role!",
+    "about": "This is a bot for managing self asigned roles. You can whitelist catagories of roles, and save role profiles"
 }
