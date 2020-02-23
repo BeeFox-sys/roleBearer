@@ -37,7 +37,7 @@ module.exports = {
             if (catagories.hasOwnProperty(key)) {
                 const data = catagories[key];
                 
-                let parts = splitMessage(`> **${await capatalizeFirst(escapeMarkdown(key))}**\n`+data,{maxLength:1800,prepend:`> **${await capatalizeFirst(escapeMarkdown(key))}**\n`})
+                let parts = splitMessage(`> **${await capatalizeFirst(escapeMarkdown(key))}**`+data,{maxLength:1800,prepend:`> **${await capatalizeFirst(escapeMarkdown(key))}**\n`})
                 pages = pages.concat(parts)
                 
             }
@@ -45,7 +45,7 @@ module.exports = {
         console.log(pages)
         for (let index = 0; index < pages.length; index++) {
             const page = pages[index];
-            pages[index] = `__Self assignable roles__\n> `+page.trim()+`\n*Use \`role!join [role name]\` to join a role, and \`role!leave [role name]\` to leave a role*`
+            pages[index] = `__Self assignable roles__\n`+page.trim()+`\n*Use \`role!join [role name]\` to join a role, and \`role!leave [role name]\` to leave a role*`
         }
         
         let page = await message.channel.send(pages[0])
