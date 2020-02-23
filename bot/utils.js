@@ -57,7 +57,6 @@ async function getGuildDoc(id){
     return guild
 }
 
-const {MessageEmbed} = require("discord.js")
 async function sendPages(pages, message, page, userID, start){
     if(pages.length == 1) return
     if(page < 0) page = 0//pages.length-1
