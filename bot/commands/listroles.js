@@ -62,14 +62,16 @@ module.exports = {
 
 
 async function sendPages(pages, message, page, userID){
+    if(page < 0) page = pages.length-1
+    if(page > pages.length-1) page = 0
     await message.edit(pages[page])
-    if(page != 0) await message.react("◀")
+    await message.react("◀")
     await message.react("❌")
-    if(page != pages.length-1) await message.react("▶")
+    await message.react("▶")
     let filter = (reaction,user) => (reaction.emoji.name === '◀' || reaction.emoji.name === "▶" || reaction.emoji.name === "❌") && user.id === userID
     let collected  = await message.awaitReactions(filter,{max:1,time:60000})
     let reaction = collected.first()
-    await message.reactions.removeAll()
+    await reaction.remove()
     switch(reaction.emoji.name){
         case "◀":
             return sendPages(pages,message,page-1,userID)
