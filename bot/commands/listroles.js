@@ -18,7 +18,7 @@ module.exports = {
         let catagories = {}
         for (const role of guild.roles) {
             if(!catagories[role[1]]){
-                catagories[role[1]] = `> **${await capatalizeFirst(escapeMarkdown(role[1]))}**`
+                catagories[role[1]] = ``
                 if(guild.whitelist.has(role[1])){
                     let whitelistRole = await message.guild.roles.resolve(guild.whitelist.get(role[1]))
                     catagories[role[1]] += ` (${whitelistRole.name} required)`
@@ -32,19 +32,22 @@ module.exports = {
             catagories[role[1]] += `\n${escapeMarkdown(guildRole.name)}${userHas ? " ✅":""}`
         }
         guild.save()
-        let msg = ""
+        let pages = []
         for (const key in catagories) {
             if (catagories.hasOwnProperty(key)) {
                 const data = catagories[key];
-                msg += data+'\n'
+                
+                let parts = splitMessage(`> **${await capatalizeFirst(escapeMarkdown(key))}**\n`+data,{maxLength:1800,prepend:`> **${await capatalizeFirst(escapeMarkdown(key))}**\n`})
+                pages = pages.concat(parts)
+                
             }
         }
-        let pages = msg.split(">")
-        pages = pages.filter(n=>n)
+        console.log(pages)
         for (let index = 0; index < pages.length; index++) {
             const page = pages[index];
             pages[index] = `__Self assignable roles__\n> `+page.trim()+`\n*Use \`role!join [role name]\` to join a role, and \`role!leave [role name]\` to leave a role*`
         }
+        
         let page = await message.channel.send(pages[0])
         return sendPages(pages,page,0,message.author.id, true)
     }

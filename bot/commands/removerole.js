@@ -2,7 +2,7 @@ const {guilds} = require("../schemas")
 const {getGuildDoc} = require ("../utils")
 
 module.exports = {
-    name: 'unlist-role',
+    name: 'remove-role',
     aliases: [],
     description: 'removes a role from self assginable roles',
     usage: ['remove-role <name...>'],
