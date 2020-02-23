@@ -1,5 +1,5 @@
 const {guilds} = require("../schemas")
-const {getGuildDoc,capatalizeFirst} = require ("../utils")
+const {getGuildDoc,capatalizeFirst,sendPages} = require ("../utils")
 const Discord = require("discord.js")
 const {escapeMarkdown,splitMessage} = Discord.Util
 
@@ -46,38 +46,9 @@ module.exports = {
             pages[index] = `__Self assignable roles__\n> `+page.trim()+`\n*Use \`role!join [role name]\` to join a role, and \`role!leave [role name]\` to leave a role*`
         }
         let page = await message.channel.send(pages[0])
-        sendPages(pages,page,0,message.author.id, true)
-        // let msgBits = splitMessage(msg,{char:`>`, prepend:'>',maxLength:1950})
-        // if(msgBits[0].length > 2000) {
-        //     let tempBits = []
-        //     for (const bit of msgBits) {
-        //         tempBits.push(splitMessage(bit))
-        //     }
-        //     msgBits = tempBits.flat()
-        // }
-        // message.channel.send(msgBits)
+        return sendPages(pages,page,0,message.author.id, true)
     }
 };
 
 
 
-async function sendPages(pages, message, page, userID, start){
-    if(page < 0) page = pages.length-1
-    if(page > pages.length-1) page = 0
-    await message.edit(pages[page])
-    if(start)await message.react("◀")
-    if(start)await message.react("❌")
-    if(start)await message.react("▶")
-    let filter = (reaction,user) => (reaction.emoji.name === '◀' || reaction.emoji.name === "▶" || reaction.emoji.name === "❌") && user.id === userID
-    let collected  = await message.awaitReactions(filter,{max:1,time:60000})
-    let reaction = collected.first()
-    await reaction.users.remove(userID)
-    switch(reaction.emoji.name){
-        case "◀":
-            return sendPages(pages,message,page-1,userID,false)
-        case "▶":
-            return sendPages(pages,message,page+1,userID,false)
-        default:
-            return message.reactions.removeAll()
-    }
-}

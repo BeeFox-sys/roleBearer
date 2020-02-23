@@ -57,10 +57,31 @@ async function getGuildDoc(id){
     return guild
 }
 
+async function sendPages(pages, message, page, userID, start){
+    if(page < 0) page = pages.length-1
+    if(page > pages.length-1) page = 0
+    await message.edit(pages[page])
+    if(start)await message.react("◀")
+    if(start)await message.react("❌")
+    if(start)await message.react("▶")
+    let filter = (reaction,user) => (reaction.emoji.name === '◀' || reaction.emoji.name === "▶" || reaction.emoji.name === "❌") && user.id === userID
+    let collected  = await message.awaitReactions(filter,{max:1,time:60000})
+    let reaction = collected.first()
+    await reaction.users.remove(userID)
+    switch(reaction.emoji.name){
+        case "◀":
+            return sendPages(pages,message,page-1,userID,false)
+        case "▶":
+            return sendPages(pages,message,page+1,userID,false)
+        default:
+            return message.reactions.removeAll()
+    }
+}
 
 module.exports = {
     userFromMention: userFromMention,
     humanReadablePermissions: humanReadablePermissions,
     getGuildDoc: getGuildDoc,
-    capatalizeFirst: capatalizeFirst
+    capatalizeFirst: capatalizeFirst,
+    sendPages:sendPages
 }
