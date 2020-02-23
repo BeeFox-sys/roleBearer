@@ -57,10 +57,13 @@ async function getGuildDoc(id){
     return guild
 }
 
+const {MessageEmbed} = require("discord.js")
 async function sendPages(pages, message, page, userID, start){
-    if(page < 0) page = pages.length-1
-    if(page > pages.length-1) page = 0
-    await message.edit(pages[page])
+    if(pages.length == 1) return
+    if(page < 0) page = 0//pages.length-1
+    if(page > pages.length-1) page = pages.length-1//0
+    let pageNum = `\n[${page+1}/${pages.length}]`
+    await message.edit(pages[page]+pageNum)
     if(start)await message.react("◀")
     if(start)await message.react("❌")
     if(start)await message.react("▶")

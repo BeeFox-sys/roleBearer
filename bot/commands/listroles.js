@@ -12,7 +12,7 @@ module.exports = {
     hidden: false,
     owner: false,
     userPerms: [],
-    runPerms: ["MANAGE_MESSAGES"],
+    runPerms: ["MANAGE_MESSAGES","EMBED_LINKS"],
 	async execute(message, args) {
         let guild = await getGuildDoc(message.guild.id)
         let catagories = {}
@@ -42,7 +42,6 @@ module.exports = {
                 
             }
         }
-        console.log(pages)
         for (let index = 0; index < pages.length; index++) {
             const page = pages[index];
             pages[index] = `__Self assignable roles__\n`+page.trim()+`\n*Use \`role!join [role name]\` to join a role, and \`role!leave [role name]\` to leave a role*`
