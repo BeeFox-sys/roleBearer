@@ -77,6 +77,7 @@ async function sendPages(pages, message, page, userID){
             return sendPages(pages,message,page-1,userID)
         case "▶":
             return sendPages(pages,message,page+1,userID)
+        default:
+            return message.reactions.removeAll()
     }
-
 }
