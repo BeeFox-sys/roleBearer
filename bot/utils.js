@@ -69,6 +69,7 @@ async function sendPages(pages, message, page, userID, start){
     let filter = (reaction,user) => (reaction.emoji.name === '◀' || reaction.emoji.name === "▶" || reaction.emoji.name === "❌") && user.id === userID
     let collected  = await message.awaitReactions(filter,{max:1,time:60000})
     let reaction = collected.first()
+    if(!reaction) return message.reactions.removeAll()
     await reaction.users.remove(userID)
     switch(reaction.emoji.name){
         case "◀":
