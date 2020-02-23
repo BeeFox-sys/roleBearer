@@ -32,21 +32,49 @@ module.exports = {
             catagories[role[1]] += `\n${escapeMarkdown(guildRole.name)}${userHas ? " ✅":""}`
         }
         guild.save()
-        let msg = `**__Self assignable roles__**`
+        let msg = ""
         for (const key in catagories) {
             if (catagories.hasOwnProperty(key)) {
                 const data = catagories[key];
-                msg += '\n'+data
+                msg += data+'\n'
             }
         }
-        let msgBits = splitMessage(msg,{char:`>`, prepend:'>',maxLength:1950})
-        if(msgBits[0].length > 2000) {
-            let tempBits = []
-            for (const bit of msgBits) {
-                tempBits.push(splitMessage(bit))
-            }
-            msgBits = tempBits.flat()
+        let pages = msg.split(">")
+        pages = pages.filter(n=>n)
+        for (let index = 0; index < pages.length; index++) {
+            const page = pages[index];
+            pages[index] = `__Self assignable roles__\n> `+page.trim()+`\n*Use \`role!join [role name]\` to join a role, and \`role!leave [role name]\` to leave a role*`
         }
-        message.channel.send(msgBits)
+        let page = await message.channel.send(pages[0])
+        sendPages(pages,page,0,message.author.id)
+        // let msgBits = splitMessage(msg,{char:`>`, prepend:'>',maxLength:1950})
+        // if(msgBits[0].length > 2000) {
+        //     let tempBits = []
+        //     for (const bit of msgBits) {
+        //         tempBits.push(splitMessage(bit))
+        //     }
+        //     msgBits = tempBits.flat()
+        // }
+        // message.channel.send(msgBits)
     }
 };
+
+
+
+async function sendPages(pages, message, page, userID){
+    await message.edit(pages[page])
+    if(page != 0) await message.react("◀")
+    await message.react("❌")
+    if(page != pages.length-1) await message.react("▶")
+    let filter = (reaction,user) => (reaction.emoji.name === '◀' || reaction.emoji.name === "▶" || reaction.emoji.name === "❌") && user.id === userID
+    let collected  = await message.awaitReactions(filter,{max:1,time:60000})
+    let reaction = collected.first()
+    await message.reactions.removeAll()
+    switch(reaction.emoji.name){
+        case "◀":
+            return sendPages(pages,message,page-1,userID)
+        case "▶":
+            return sendPages(pages,message,page+1,userID)
+    }
+
+}
