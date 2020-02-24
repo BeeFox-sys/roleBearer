@@ -37,6 +37,7 @@ Client.on('ready', async () => {
     console.log(`Logged in as ${Client.user.tag} (ID: ${Client.user.id})!`);
     console.log(`${Client.guilds.cache.size} servers`);
     Client.oauth = await Client.fetchApplication()
+    Client.user.setPresence({ activity: { name: `to ${Client.config.prefix}`, type: `LISTENING` }})
 })
 //Message handling
 .on("message",async message =>{
