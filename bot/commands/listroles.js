@@ -12,7 +12,7 @@ module.exports = {
     hidden: false,
     owner: false,
     userPerms: [],
-    runPerms: ["MANAGE_MESSAGES","EMBED_LINKS"],
+    runPerms: ["MANAGE_MESSAGES","EMBED_LINKS","ADD_REACTIONS","READ_MESSAGE_HISTORY"],
 	async execute(message, args) {
         let guild = await getGuildDoc(message.guild.id)
         let catagories = {}
