@@ -7,9 +7,10 @@ module.exports = {
     hidden: false,
     owner: false,
     userPerms: ["MANAGE_ROLES"],
-    runPerms: ["MANAGE_ROLES"],
+    runPerms: [],
 	async execute(message, args) {
         let roles = message.guild.roles.cache
+        roles.sort((a,b)=>b.position-a.position)
         let rolesMessage = `> **All ${message.guild.name} Roles**`
         for(role of roles){
             rolesMessage += `\n• \`${role[1].name}\``
