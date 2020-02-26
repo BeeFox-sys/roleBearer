@@ -6,6 +6,7 @@ const {userFromMention,humanReadablePermissions,getGuildDoc} = require("./utils"
 const client = new Discord.Client()
 global.Client = client
 Client.config = require("../config")
+Client.options.disableEveryone = true
 //Setup Commands
 Client.commands = new Discord.Collection();
 Client.permissions = []
