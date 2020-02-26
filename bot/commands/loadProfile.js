@@ -25,7 +25,7 @@ module.exports = {
         let userHighest = user.roles.highest
         let botHighest = message.guild.me.roles.highest
 
-        if(user != message.guild.owner) await user.setNickname(profile.nickname || " ")
+        if(user != message.guild.owner) await user.setNickname(profile.nickname || " ").catch()
         await user.roles.remove(Array.from(guild.roles.keys()).filter(id=>!profile.roles.includes(id)))
         await user.roles.add(profile.roles).catch()
         
