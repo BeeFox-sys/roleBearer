@@ -46,7 +46,7 @@ module.exports = {
             const page = pages[index];
             pages[index] = `__Self assignable roles__\n`+page.trim()+`\n*Use \`role!join [role name]\` to join a role, and \`role!leave [role name]\` to leave a role*`
         }
-        
+        if(!pages.length) return message.channel.send("This server has no self assignable roles")
         let page = await message.channel.send(pages[0])
         return sendPages(pages,page,0,message.author.id, true)
     }
