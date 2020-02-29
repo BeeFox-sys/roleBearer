@@ -22,7 +22,7 @@ module.exports = {
             if(info.length < 2) { returnMessage+=`\`${line||"[no data entered]"}\` Not enough arguments, must supply a catagory and a role\n`; continue }
             let roleCatagory = info.shift().toLowerCase()
             let roleName = info.join(' ')
-            let role = message.guild.roles.cache.find(role => role.name.toLowerCase() == roleName.toLowerCase())
+            let role = message.guild.roles.cache.find(role => role.name.toLowerCase() == roleName.toLowerCase() || role.name.toLowerCase().replace(/[^\w|\s]/g,"") == roleName.toLowerCase().replace(/[^\w|\s]/g,""))
             if(!role) { returnMessage+=`\`${line}\` Not a valid role!\n`; continue }
             guild.roles.set(role.id,roleCatagory)
             returnMessage+=`\`${line}\` Added **${role.name}** to the **${roleCatagory}** catagory\n`
