@@ -1,5 +1,5 @@
 const {guilds} = require("../schemas")
-const {getGuildDoc} = require ("../utils")
+const {getGuildDoc,findQuote} = require ("../utils")
 
 module.exports = {
     name: 'add-role',
@@ -13,6 +13,7 @@ module.exports = {
     runPerms: [],
 	async execute(message, args) {
         if(args.length<2) return message.channel.send("You must supply a catagory and a role name!")
+        args = await findQuote(args)
         let roleCatagory = args.shift().toLowerCase()
         let roleName = args.join(' ')
         let role = message.guild.roles.cache.find(role => role.name.toLowerCase() == roleName.toLowerCase() || role.name.toLowerCase().replace(/[^\w|\s]/g,"") == roleName.toLowerCase().replace(/[^\w|\s]/g,""))

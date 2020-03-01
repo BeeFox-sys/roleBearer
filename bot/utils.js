@@ -81,10 +81,43 @@ async function sendPages(pages, message, page, userID, start){
     }
 }
 
+async function findQuote(args){
+    let pairs = {
+        0:[`'`,`'`],
+        1:[`"`,`"`],
+        2:['“','”'],
+        3:['‘','’']
+    }
+    let id   
+    for (const key in pairs) {
+        if (pairs.hasOwnProperty(key)) {
+            const pair = pairs[key];
+            if(args[0].startsWith(pair[0])){
+                id = key
+                    args[0] = args[0].substring(1)
+                break
+            }
+        }
+    }
+    if(!id) return args
+    let index = 0
+        for (const part of args) {
+        if(part.endsWith(pairs[id][1])){
+            args[index] = part.substring(0,part.length-1)
+            break
+        }
+        index++
+    }
+    let quotedString = args.slice(0,index+1).join(" ")
+    args.splice(0,index+1,quotedString)
+    return args
+}
+
 module.exports = {
     userFromMention: userFromMention,
     humanReadablePermissions: humanReadablePermissions,
     getGuildDoc: getGuildDoc,
     capatalizeFirst: capatalizeFirst,
-    sendPages:sendPages
+    sendPages:sendPages,
+    findQuote:findQuote
 }
