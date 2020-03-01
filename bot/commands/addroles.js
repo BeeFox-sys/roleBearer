@@ -23,7 +23,7 @@ module.exports = {
             info = await findQuote(info)
             let roleCatagory = info.shift().toLowerCase()
             let roleName = info.join(' ')
-            let role = message.guild.roles.cache.find(role => role.name.toLowerCase() == roleName.toLowerCase() || role.name.toLowerCase().replace(/[^\w|\s]/g,"") == roleName.toLowerCase().replace(/[^\w|\s]/g,""))
+            let role = message.guild.roles.cache.find(role => role.name.toLowerCase() == roleName.toLowerCase() || role.name.toLowerCase().replace(/[^\w| ]/g,"") == roleName.toLowerCase().replace(/[^\w| ]/g,""))
             if(!role) { returnMessage+=`\`${line}\` Not a valid role!\n`; continue }
             guild.roles.set(role.id,roleCatagory)
             returnMessage+=`\`${line}\` Added **${role.name}** to the **${roleCatagory}** catagory\n`

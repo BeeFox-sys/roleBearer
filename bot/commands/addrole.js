@@ -16,7 +16,7 @@ module.exports = {
         args = await findQuote(args)
         let roleCatagory = args.shift().toLowerCase()
         let roleName = args.join(' ')
-        let role = message.guild.roles.cache.find(role => role.name.toLowerCase() == roleName.toLowerCase() || role.name.toLowerCase().replace(/[^\w|\s]/g,"") == roleName.toLowerCase().replace(/[^\w|\s]/g,""))
+        let role = message.guild.roles.cache.find(role => role.name.toLowerCase() == roleName.toLowerCase() || role.name.toLowerCase().replace(/[^\w| ]/g,"") == roleName.toLowerCase().replace(/[^\w| ]/g,""))
         if(!role) return message.channel.send("Invalid role!")
         let guild = await getGuildDoc(message.guild.id)
         guild.roles.set(role.id,roleCatagory)

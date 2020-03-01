@@ -18,7 +18,7 @@ module.exports = {
         if(args.length<1) return message.channel.send("You must supply a role name!")
         let roleName = args.join(' ')
 
-        let role = message.guild.roles.cache.filter(role => guild.roles.has(role.id)).find(role => role.name.toLowerCase() == roleName.toLowerCase() || role.name.toLowerCase().replace(/[^\w|\s]/g,"") == roleName.toLowerCase().replace(/[^\w|\s]/g,""))
+        let role = message.guild.roles.cache.filter(role => guild.roles.has(role.id)).find(role => role.name.toLowerCase() == roleName.toLowerCase() || role.name.toLowerCase().replace(/[^\w| ]/g,"") == roleName.toLowerCase().replace(/[^\w| ]/g,""))
 
         if(!role) return message.channel.send("Invalid role!")
         let roleCat = guild.roles.get(role.id)
